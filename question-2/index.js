@@ -97,7 +97,7 @@ function solution(N, users) {
 
   const sortedEntries = Object.entries(stageStats).sort(failureRateComparator);
   const answer = sortedEntries.map((entry) => {
-    return entry[0];
+    return parseInt(entry[0], 10);
   });
 
   return answer;
