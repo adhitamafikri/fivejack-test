@@ -6,7 +6,6 @@
 function solution(relations) {
   const rowLength = relations.length;
   const colLength = relations[0].length;
-  let answer = 0;
   let possibleCandidates = {};
 
   // Map the possible candidate keys
@@ -31,7 +30,7 @@ function solution(relations) {
   }
 
   // debugs
-  console.log("possible candidates\n", possibleCandidates);
+  // console.log("possible candidates\n", possibleCandidates);
 
   /**
    * Determine the possible tuples
@@ -42,8 +41,6 @@ function solution(relations) {
     // if the current candidate has length equals to rowLength, then it will be a candidate key
     if (currentCandidate.length === rowLength) {
       tuples.push(`["key-${i}"]`);
-      // increment answer by 1
-      answer += 1;
     }
 
     // if not, search for another candidate to be paired in a tuple
@@ -56,8 +53,6 @@ function solution(relations) {
         // if the current candidate 2 has length equals to rowLength, then it will be a candidate key
         if (currentCandidate2.length === rowLength) {
           tuples.push(`["key-${j}"]`);
-          // increment answer by 1
-          answer += 1;
           
           // to prevent looping on the last element,
           // if a candidate cannot find its pair
@@ -67,8 +62,6 @@ function solution(relations) {
         // if not, combine them with the current candidate 1
         else {
           tuples.push(`["key-${i}", "key-${j}"]`);
-          // increment answer by 1
-          answer += 1;
           // set the main loop index (i) to the (j)
           i = j;
 
@@ -77,8 +70,13 @@ function solution(relations) {
       }
     }
   }
-  console.log("tuples\n", tuples);
 
+  /**
+   * Uncomment this if you want to see the tuples
+   */
+  // console.log("tuples\n", tuples);
+
+  const answer = tuples.length
   return answer;
 }
 
