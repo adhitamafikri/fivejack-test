@@ -39,7 +39,6 @@ function solution(relations) {
   let tuples = [];
   for (let i = 0; i < colLength; i++) {
     let currentCandidate = possibleCandidates[`key-${i}`];
-    console.log("c1:", currentCandidate);
     // if the current candidate has length equals to rowLength, then it will be a candidate key
     if (currentCandidate.length === rowLength) {
       tuples.push(`["key-${i}"]`);
@@ -54,16 +53,15 @@ function solution(relations) {
 
       for (let j = i + 1; j < colLength; j++) {
         let currentCandidate2 = possibleCandidates[`key-${j}`];
-        console.log("c1 - c2", currentCandidate, currentCandidate2);
         // if the current candidate 2 has length equals to rowLength, then it will be a candidate key
         if (currentCandidate2.length === rowLength) {
           tuples.push(`["key-${j}"]`);
           // increment answer by 1
           answer += 1;
           
+          // to prevent looping on the last element,
+          // if a candidate cannot find its pair
           if (j === colLength - 1) i = colLength
-
-          console.log("tuples: ", tuples);
         }
 
         // if not, combine them with the current candidate 1
@@ -78,49 +76,47 @@ function solution(relations) {
         }
       }
     }
-
-    console.log("tuples: ", tuples);
   }
-  // console.log("tuples\n", tuples);
+  console.log("tuples\n", tuples);
 
   return answer;
 }
 
 // expected 2 tuples [key-0, [key-1, key-2]]
-// console.log(
-//   solution([
-//     ["100", "ryan", "music", "2"],
-//     ["200", "apeach", "math", "2"],
-//     ["300", "tube", "computer", "3"],
-//     ["400", "con", "computer", "4"],
-//     ["500", "muzi", "music", "3"],
-//     ["600", "apeach", "music", "2"],
-//   ])
-// );
+console.log(
+  solution([
+    ["100", "ryan", "music", "2"],
+    ["200", "apeach", "math", "2"],
+    ["300", "tube", "computer", "3"],
+    ["400", "con", "computer", "4"],
+    ["500", "muzi", "music", "3"],
+    ["600", "apeach", "music", "2"],
+  ])
+);
 
 // expected 4 tuples [key-0, [key-1, key-2], [key-3], [key-5]]
-// console.log(
-//   solution([
-//     ["100", "ryan", "music", "migos", "2", "potion"],
-//     ["200", "apeach", "math", "einstein", "2", "magic"],
-//     ["300", "tube", "computer", "torvald", "3", "teleport"],
-//     ["400", "con", "computer", "lingo", "4", "flash"],
-//     ["500", "muzi", "music", "beethoven", "3", "shriek"],
-//     ["600", "apeach", "music", "roddyrich", "2", "corkscrew"],
-//   ])
-// );
+console.log(
+  solution([
+    ["100", "ryan", "music", "migos", "2", "potion"],
+    ["200", "apeach", "math", "einstein", "2", "magic"],
+    ["300", "tube", "computer", "torvald", "3", "teleport"],
+    ["400", "con", "computer", "lingo", "4", "flash"],
+    ["500", "muzi", "music", "beethoven", "3", "shriek"],
+    ["600", "apeach", "music", "roddyrich", "2", "corkscrew"],
+  ])
+);
 
 // expected 5 tuples [key-0, [key-1, key-2], [key-3], [key-5], [key-6]]
-// console.log(
-//   solution([
-//     ["100", "ryan", "music", "migos", "2", "potion", "x0"],
-//     ["200", "apeach", "math", "einstein", "2", "magic", "x1"],
-//     ["300", "tube", "computer", "torvald", "3", "teleport", "x2"],
-//     ["400", "con", "computer", "kurowski", "4", "flash", "x3"],
-//     ["500", "muzi", "music", "beethoven", "3", "shriek", "x4"],
-//     ["600", "apeach", "music", "roddyrich", "2", "corkscrew", "x5"],
-//   ])
-// );
+console.log(
+  solution([
+    ["100", "ryan", "music", "migos", "2", "potion", "x0"],
+    ["200", "apeach", "math", "einstein", "2", "magic", "x1"],
+    ["300", "tube", "computer", "torvald", "3", "teleport", "x2"],
+    ["400", "con", "computer", "kurowski", "4", "flash", "x3"],
+    ["500", "muzi", "music", "beethoven", "3", "shriek", "x4"],
+    ["600", "apeach", "music", "roddyrich", "2", "corkscrew", "x5"],
+  ])
+);
 
 // expected 7 tuples [key-0, [key-1, key-2], [key-3], [key-4, key-7], [key-5], [key-6], [key-8]]
 console.log(
